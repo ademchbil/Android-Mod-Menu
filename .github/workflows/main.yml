@@ -28,10 +28,11 @@ jobs:
           ndk-version: r26d
           add-to-path: true
 
-      - name: Fix Gradle Wrapper
+      - name: Download Gradle Wrapper JAR
         run: |
-          gradle wrapper --gradle-version 8.2
-          chmod +x ./gradlew
+          mkdir -p gradle/wrapper
+          curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar
+          chmod +x gradlew
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --stacktrace
